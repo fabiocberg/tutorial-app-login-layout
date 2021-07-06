@@ -1,8 +1,17 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
-import Container, {Button, Input, Text} from './components/ui'
+import { 
+    StyleSheet, 
+    View, 
+    TouchableOpacity, 
+    Image 
+} from 'react-native'
 
-import { globalStyles as gs } from './styles/GlobalStyles'
+import Container, {Button, Input, Text} 
+    from './components/ui'
+
+import { 
+    globalStyles as gs 
+} from './styles/GlobalStyles'
 
 export interface SignInScreenProps {
 }
