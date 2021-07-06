@@ -1,6 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
-import { StyleSheet, View, Text, StyleProp, ViewStyle, TextInput } from 'react-native'
+import { StyleSheet, View, Text as RNText, StyleProp, ViewStyle, TextStyle, TextInput } from 'react-native'
+
+import { globalStyles as gs } from '../styles/GlobalStyles'
 
 /**
  * INPUT
@@ -49,7 +51,7 @@ export interface ButtonProps {
 export function Button ({style, children}: ButtonProps) {
     return (
         <LinearGradient style={[buttonStyles.container, style]} colors={['#56C143', '#284F21']}>
-            <Text style={buttonStyles.label}>{children}</Text>    
+            <RNText style={buttonStyles.label}>{children}</RNText>    
         </LinearGradient>
     )
 }
@@ -71,16 +73,34 @@ const buttonStyles = StyleSheet.create({
 })
 
 /**
+ * TEXT
+ */
+export interface TextProps {
+    children:React.ReactNode
+    style?: StyleProp<ViewStyle | TextStyle>
+    isTitle?: boolean
+}
+
+export function Text ({children, style, isTitle}: TextProps) {
+    return (
+        <RNText style={[isTitle ? gs.title : gs.text, style]}>
+            {children}
+        </RNText>
+    )
+}
+
+/**
  * CONTAINER
  */
 export interface ContainerProps {
+    children?:React.ReactNode
     style?: StyleProp<ViewStyle>
 }
 
-export default function Container ({style}: ContainerProps) {
+export default function Container ({children, style}: ContainerProps) {
     return (
         <View style={[containerStyles.container, style]}>
-            <Text>Container</Text>
+            {children}
         </View>
     )
 }

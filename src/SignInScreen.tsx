@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
-import Button from './components/Button'
-import Input from './components/Input'
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import Container, { Button, Input, Text } from './components/UI'
 
 import { globalStyles as gs } from './styles/GlobalStyles'
 
@@ -12,9 +11,9 @@ const SignInScreen = () => {
     return (
         <>
             <Image style={styles.top} source={require('../assets/top.png')} />
-            <View style={styles.container}>
-                <Text style={[gs.title, styles.title]}>Login</Text>
-                <Text style={[gs.text, styles.message]}>Bem vindo!</Text>
+            <Container>
+                <Text isTitle style={styles.title}>Login</Text>
+                <Text style={styles.message}>Bem vindo!</Text>
                 <Input placeholder='Email' />
                 <Input placeholder='Senha' secureTextEntry />
                 <View style={styles.containerEnterButtons}>
@@ -27,18 +26,12 @@ const SignInScreen = () => {
                         <Text style={[gs.text, styles.linkRegister]}>Registre-se</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </Container>
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     title: {
         width: '100%',
         marginBottom: 10,
