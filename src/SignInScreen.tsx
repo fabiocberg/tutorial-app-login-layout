@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
-import Container, { Button, Input, Text } from './components/UI'
+import Container, {Button, Input, Text} from './components/ui'
 
 import { globalStyles as gs } from './styles/GlobalStyles'
 
