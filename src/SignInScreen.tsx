@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
 import { 
     StyleSheet, 
     View, 
@@ -17,16 +18,64 @@ export interface SignInScreenProps {
 }
 
 const SignInScreen = () => {
+
+    const { control, handleSubmit, formState: { errors } } = useForm()
+
+    // const [email, setEmail] = useState('')
+    // const [password, setPassword] = useState('')
+
+    const onSubmit = (data: any) => {
+        console.log(data);
+    }
+
     return (
         <>
             <Image style={styles.top} source={require('../assets/top.png')} />
             <Container>
                 <Text isTitle style={styles.title}>Login</Text>
                 <Text style={styles.message}>Bem vindo!</Text>
-                <Input placeholder='Email' />
-                <Input placeholder='Senha' secureTextEntry />
+                {/* EMAIL */}
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Input placeholder='Email'
+                            autoCapitalize='none'
+                            keyboardType='email-address'
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                    name="email"
+                    defaultValue=""
+                />
+                {errors.email && <Text>Informe seu email.</Text>}
+                {/* PASSWORD */}
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <Input placeholder='Senha' secureTextEntry
+                            autoCapitalize='none'
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                        />
+                    )}
+                    name="password"
+                    defaultValue=""
+                />
+                {errors.password && <Text>Informe sua senha.</Text>}
                 <View style={styles.containerEnterButtons}>
-                    <Button style={styles.containerEnterItem}>Entrar</Button>
+                    <Button style={styles.containerEnterItem} 
+                        onPress={handleSubmit(onSubmit)}>
+                            Entrar
+                    </Button>
                     <Text style={[styles.containerEnterItem, styles.forgotPass, gs.text]}>Esqueceu a senha?</Text>
                 </View>
                 <View style={styles.containerRegister}>

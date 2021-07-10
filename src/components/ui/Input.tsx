@@ -1,19 +1,27 @@
 import React from 'react'
-import { StyleSheet, TextInput } from 'react-native'
+import { KeyboardTypeOptions, NativeSyntheticEvent, StyleSheet, TextInput, TextInputFocusEventData } from 'react-native'
 
 export interface InputProps {
     value?: string
     placeholder?: string
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+    keyboardType?: KeyboardTypeOptions
     onChangeText?: (text: string) => void;
+    onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
     secureTextEntry?: boolean
 }
 
-export function Input ({value, placeholder, onChangeText, secureTextEntry}: InputProps) {
+export function Input ({value, placeholder, autoCapitalize, keyboardType, 
+    onChangeText, onBlur, secureTextEntry}: InputProps) {
     return (
         <TextInput 
             style={inputStyles.container} 
+            autoCapitalize={autoCapitalize}
+            keyboardType={keyboardType}
+            onBlur={onBlur}
             onChangeText={onChangeText} 
             placeholder={placeholder}
+            value={value}
             placeholderTextColor='#747474'
             secureTextEntry={secureTextEntry}
         />
