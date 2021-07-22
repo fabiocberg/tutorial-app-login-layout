@@ -9,6 +9,7 @@ import {
 
 import Container, {Button, Input, Text} 
     from './components/ui'
+import Form, { FormInputTemplate } from './components/ui/Form'
 
 import { 
     globalStyles as gs 
@@ -28,49 +29,39 @@ const SignInScreen = () => {
         console.log(data);
     }
 
+    const formProps = {
+        control,
+        errors
+    }
+
     return (
         <>
             <Image style={styles.top} source={require('../assets/top.png')} />
             <Container>
                 <Text isTitle style={styles.title}>Login</Text>
                 <Text style={styles.message}>Bem vindo!</Text>
-                {/* EMAIL */}
-                <Controller
-                    control={control}
-                    rules={{
-                        required: true,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <Input placeholder='Email'
-                            autoCapitalize='none'
-                            keyboardType='email-address'
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                        />
-                    )}
-                    name="email"
-                    defaultValue=""
-                />
-                {errors.email && <Text>Informe seu email.</Text>}
-                {/* PASSWORD */}
-                <Controller
-                    control={control}
-                    rules={{
-                        required: true,
-                    }}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <Input placeholder='Senha' secureTextEntry
-                            autoCapitalize='none'
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                        />
-                    )}
-                    name="password"
-                    defaultValue=""
-                />
-                {errors.password && <Text>Informe sua senha.</Text>}
+                {/* FORM */}
+                <Form>
+                    {/* EMAIL */}
+                    <FormInputTemplate 
+                        name="email"
+                        placeholder='Email'
+                        autoCapitalize='none'
+                        keyboardType='email-address'
+                        formProps={formProps}
+                    />
+                    {/* SENHA */}
+                    <FormInputTemplate 
+                        name="password"
+                        placeholder='Senha' 
+                        secureTextEntry
+                        autoCapitalize='none'
+                        formProps={formProps}
+                    />
+                </Form>
+
+
+                {/* SCREEN BUTTONS */}
                 <View style={styles.containerEnterButtons}>
                     <Button style={styles.containerEnterItem} 
                         onPress={handleSubmit(onSubmit)}>
